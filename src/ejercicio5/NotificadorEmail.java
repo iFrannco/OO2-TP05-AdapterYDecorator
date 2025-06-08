@@ -7,50 +7,55 @@ import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class NotificadorEmail implements Notificador {
-    private String username;
-    private String password;
-    private String port;
-    private String proveedorDeCorreo;
-    private String smpt;
-    private String tls;
-    private String correoReceptor;
+    private final String USERNAME = "372a3b3cd6da45";
+    private final String PASSWORD = "0454bf60332399";
+    private final String HOST = "sandbox.smtp.mailtrap.io";
+    private String emisor;
 
-    public NotificadorEmail(String username, String password, String port, String proveedorDeCorreo, String smpt, String tls, String correoReceptor) {
-        this.username = username;
-        this.password = password;
-        this.port = port;
-        this.proveedorDeCorreo = proveedorDeCorreo;
-        this.smpt = smpt;
-        this.tls = tls;
-        this.correoReceptor = correoReceptor;
+    public NotificadorEmail(String from) {
+        this.emisor = from;
     }
 
-    @Override
-    public void notificar(String mensaje) {
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host", this.proveedorDeCorreo);
-        prop.put("mail.smtp.port", this.port);
-        prop.put("mail.smtp.auth", this.smpt);
-        prop.put("mail.smtp.starttls.enable", this.tls);
+    public void notificar(String receptor) {
+        // configure SMTP details
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", HOST);
+        props.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(prop, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
+        // create the mail Session object
+        Session session = Session.getInstance(props,
+                new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(USERNAME, PASSWORD);
+                    }
+                });
 
         try {
+            // create a MimeMessage object
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(
-                    Message.RecipientType.TO, InternetAddress.parse(this.correoReceptor));
-            message.setSubject("Nueva inscripción a un concurso");
-            message.setText(mensaje);
+            // set From email field
+            message.setFrom(new InternetAddress(this.emisor));
+            // set To email field
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(receptor));
+            // set email subject field
+            message.setSubject("Incripcion exitosa.");
+            // set the content of the email message
+            message.setText("Usted se ha inscripto correctamente al concurso");
 
+            // send the email message
             Transport.send(message);
 
+            System.out.println("Email Message Sent Successfully!");
+
         } catch (MessagingException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+
+
 }
+
+

@@ -6,8 +6,10 @@ public class Participante {
     private int id;
     private String nombre;
     private int puntos;
+    private String correo;
 
-    public Participante(int id, String nombre) {
+    public Participante(int id, String nombre, String correo) {
+        this.correo = correo;
         if (nombre.equals("")) {
             throw new RuntimeException("El nombre no puede estar vacio");
         }
@@ -42,5 +44,9 @@ public class Participante {
 
     public String obtenerNombre() {
         return this.nombre;
+    }
+
+    public String obtenerCorreo() {
+        return this.correo;
     }
 }
