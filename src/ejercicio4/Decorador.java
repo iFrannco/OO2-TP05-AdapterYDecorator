@@ -1,6 +1,6 @@
 package ejercicio4;
 
-public abstract class Decorador extends Comida{
+public class Decorador extends Comida {
     private Comida comida;
 
     public Decorador(float precio, Comida comida) {

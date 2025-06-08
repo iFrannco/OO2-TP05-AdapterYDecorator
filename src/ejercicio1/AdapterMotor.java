@@ -1,7 +1,11 @@
 package ejercicio1;
 
-public class AdapterMotor implements Motor{
+public class AdapterMotor implements Motor {
     private MotorElectrico motorElectrico;
+
+    public AdapterMotor(MotorElectrico motorElectrico) {
+        this.motorElectrico = motorElectrico;
+    }
 
     @Override
     public void arrancar() {

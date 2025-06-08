@@ -1,7 +1,7 @@
 package ejercicio4;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         // Primer pedido
         var comboBasico = new ComboBasico(100, "pizza");
@@ -20,7 +20,7 @@ public class Main {
 
         // usando el patron builder
 
-        var combo = new ComboBuilder(300, "combo especial");
+        var combo = new ComboBuilder(new ComboBasico(200, "basico")); // como armo un combo de los 3 que tengo?
         var comboArmado = combo.agregarTomate().agregarCarne().agregarPapas().build();
         System.out.println(comboArmado.calcularCosto());
     }

@@ -1,34 +1,35 @@
 package ejercicio4;
 
 public class ComboBuilder {
-    private Comida comida;
+    private Comida combo;
 
-    public ComboBuilder(float precio, String descripcion){
-        this.comida = new ComboBasico(precio, descripcion);
+    // agregar mapa
+    public ComboBuilder(Comida combo) {
+        this.combo = combo;
     }
 
-    public ComboBuilder agregarTomate(){
-        this.comida = new ConTomate(this.comida);
+    public ComboBuilder agregarTomate() {
+        this.combo = new ConTomate(this.combo);
         return this;
     }
 
-    public ComboBuilder agregarPapas(){
-        this.comida = new ConPapas(this.comida);
+    public ComboBuilder agregarPapas() {
+        this.combo = new ConPapas(this.combo);
         return this;
     }
 
-    public ComboBuilder agregarCarne(){
-        this.comida = new ConCarne(this.comida);
+    public ComboBuilder agregarCarne() {
+        this.combo = new ConCarne(this.combo);
         return this;
     }
 
-    public ComboBuilder agregarQueso(){
-        this.comida = new ConQueso(this.comida);
+    public ComboBuilder agregarQueso() {
+        this.combo = new ConQueso(this.combo);
         return this;
     }
 
-    public Comida build(){
-        return this.comida;
+    public Comida build() {
+        return this.combo;
     }
 
 }
