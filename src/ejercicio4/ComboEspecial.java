@@ -1,6 +1,6 @@
 package ejercicio4;
 
-public class ComboEspecial extends Comida{
+public class ComboEspecial extends Combo {
     public ComboEspecial(float precio, String descripcion) {
         super(precio, descripcion);
     }
@@ -8,5 +8,10 @@ public class ComboEspecial extends Comida{
     @Override
     public float calcularCosto() {
         return precio;
+    }
+
+    @Override
+    public String obtenerDescripcion() {
+        return "Combo Especial";
     }
 }

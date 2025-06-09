@@ -1,10 +1,9 @@
 package ejercicio4;
 
-public class Decorador extends Comida {
+public abstract class Decorador implements Comida {
     private Comida comida;
 
-    public Decorador(float precio, Comida comida) {
-        super(precio, "");
+    public Decorador(Comida comida) {
         this.comida = comida;
     }
 
@@ -12,4 +11,10 @@ public class Decorador extends Comida {
     public float calcularCosto() {
         return comida.calcularCosto();
     }
+
+    @Override
+    public String obtenerDescripcion() {
+        return comida.obtenerDescripcion();
+    }
+
 }

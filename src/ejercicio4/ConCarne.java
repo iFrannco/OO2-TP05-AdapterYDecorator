@@ -5,11 +5,16 @@ public class ConCarne extends Decorador {
     private static final String DESCRIPCION = "+ carne ";
 
     public ConCarne(Comida comida) {
-        super(precioCarne, comida);
+        super(comida);
     }
 
     @Override
     public float calcularCosto() {
-        return super.calcularCosto() + precio;
+        return super.calcularCosto() + precioCarne;
+    }
+
+    @Override
+    public String obtenerDescripcion() {
+        return super.obtenerDescripcion() + "\n + carne";
     }
 }
